@@ -3,7 +3,7 @@ def Euclid(a, b): # Нахождение НОД алгоритмом Евкли�
         a, b = max(a,b), min(a,b)
         while a % b != 0:
             a, b = b, a % b
-        return abs(b)
+        return b
 
 def Bezout(a, b): # Нахождение частного решения уравнения ax + by = (НОД(a, b)) соотношением Безу
     if b == 0:
@@ -16,7 +16,11 @@ A, B, C = map(int, input().split())
 if A != 0 and B != 0 and C != 0:
     gcd = Euclid(A, B)
     if C % gcd == 0: # Проверка существования целочисленных решений
-        a, b, c = A // gcd, B // gcd, C // gcd
+        a, b = A // gcd, B // gcd
+        if B > 0:
+            c = C // abs(gcd)
+        else:
+            c = C // gcd
         x1, y1 = Bezout(a, b)
         x, y = c * x1, c * y1
         if B // gcd > 0:
