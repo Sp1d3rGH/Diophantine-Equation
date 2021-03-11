@@ -15,12 +15,18 @@ print("Решение диофантова уравнения вида Ax + By =
 A, B, C = map(int, input().split())
 if A != 0 and B != 0 and C != 0:
     gcd = Euclid(A, B)
-    if C % gcd == 0:
+    if C % gcd == 0: # Проверка существования целочисленных решений
         a, b, c = A // gcd, B // gcd, C // gcd
         x1, y1 = Bezout(a, b)
         x, y = c * x1, c * y1
-        print("x = " + str(x) + " - " + str(B // gcd) + " * k, где k - любое целое число")
-        print("y = " + str(y) + " + " + str(A // gcd) + " * k, где k - любое целое число")
+        if B // gcd > 0:
+            print("x = " + str(x) + " - " + str(B // gcd) + " * k, где k - любое целое число")
+        else:
+            print("x = " + str(x) + " + " + str(abs(B // gcd)) + " * k, где k - любое целое число")
+        if A // gcd > 0:
+            print("y = " + str(y) + " + " + str(A // gcd) + " * k, где k - любое целое число")
+        else:
+            print("y = " + str(y) + " - " + str(abs(A // gcd)) + " * k, где k - любое целое число")
     else:
         print("Не существует целочисленных решений.")
 
